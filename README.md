@@ -1,36 +1,82 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Blob Uploader
+
+The **Blob Uploader** is a JavaScript application designed to upload files to Vercel's blob storage, integrating with a third-party API for status updates. The application includes file size validation and a user interface to display and manage uploaded files.
+
+## Features
+
+- **File Upload to Vercel's Blob Storage**: Seamlessly upload files to Vercel's secure and efficient blob storage service.
+- **Third-Party API Integration**: Update file upload status using an external API.
+- **File Size Validation**: Ensure files meet size requirements before uploading.
+- **User-Friendly Interface**: View, manage, and delete uploaded files through a responsive UI.
 
 ## Getting Started
 
-First, run the development server:
+Follow these instructions to set up the project locally on your machine.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### Prerequisites
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- Node.js (v14 or later recommended)
+- pnpm
+- Vercel account
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Installation
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+1. **Clone the repository:**
 
-## Learn More
+    ```bash
+    git clone https://github.com/joaquinponzone/blob-uploader.git
+    cd blob-uploader
+    ```
 
-To learn more about Next.js, take a look at the following resources:
+2. **Install dependencies:**
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+    ```bash
+    pnpm install
+    ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+3. **Environment Variables:**
 
-## Deploy on Vercel
+    Create a `.env` file in the root directory and add your environment variables:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+    ```plaintext
+    VERCEL_BLOB_TOKEN=your_vercel_blob_token
+    API_KEY=your_api_key
+    ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+### Running the Application
+
+To start the development server, run:
+
+    ```bash
+    pnpm dev
+    ```
+
+Visit `http://localhost:3000` in your browser to access the application.
+
+## Usage
+
+1. **Upload Files:**
+
+    - Click the "Upload" button and select files from your local machine.
+    - Ensure the files meet size requirements before uploading.
+
+2. **View and Manage Files:**
+
+    - The dashboard displays all uploaded files.
+    - You can delete files by clicking the "Delete" button next to each file.
+
+
+## Contributing
+
+Contributions are welcome! Please follow these steps:
+
+1. Fork the repository.
+2. Create a new branch (`git checkout -b feature/your-feature`).
+3. Commit your changes (`git commit -m 'Add your feature'`).
+4. Push to the branch (`git push origin feature/your-feature`).
+5. Open a pull request.
+
+## Contact
+
+For questions or feedback, please open an issue or contact me directly at [ponzonejoaquin@gmail.com](mailto:ponzonejoaquin@gmail.com).
+
