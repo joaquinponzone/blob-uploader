@@ -1,28 +1,18 @@
-import { list } from "@vercel/blob";
-import Image from "next/image";
 import EraseImage from "./erase-image";
-import { Button } from "./ui/button";
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
   TableHead,
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { DownloadIcon, PencilIcon, Trash2Icon } from "lucide-react";
+import { DownloadIcon } from "lucide-react";
 import Link from "next/link";
 import EditImage from "./edit-image";
-
-export const dynamic = "force-dynamic";
+import { allImages } from "@/lib/actions";
 
 export async function Images() {
-  async function allImages() {
-    const blobs = await list();
-    await new Promise((resolve) => setTimeout(resolve, 3000));
-    return blobs;
-  }
   const images = await allImages();
 
   return (

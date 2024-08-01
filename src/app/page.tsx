@@ -5,6 +5,8 @@ import { Separator } from "@/components/ui/separator";
 import Uploader from "@/components/uploader";
 import { Suspense } from "react";
 
+export const dynamic = "force-dynamic";
+
 export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-start gap-4 p-4 md:p-12">

@@ -1,7 +1,15 @@
 "use server";
 
-import { del, ListBlobResultBlob, put } from "@vercel/blob";
+import { del, list, ListBlobResultBlob, put } from "@vercel/blob";
 import { revalidatePath } from "next/cache";
+import { delay } from "./utils";
+
+export async function allImages() {
+  "use server";
+  const blobs = await list();
+  await delay(2000);
+  return blobs;
+}
 
 export async function uploadImage(formData: FormData) {
   const imageFile = formData.get("image") as File;
