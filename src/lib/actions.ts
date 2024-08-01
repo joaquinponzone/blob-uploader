@@ -1,6 +1,6 @@
 "use server";
 
-import { del, put } from "@vercel/blob";
+import { del, ListBlobResultBlob, put } from "@vercel/blob";
 import { revalidatePath } from "next/cache";
 
 export async function uploadImage(formData: FormData) {
@@ -10,6 +10,21 @@ export async function uploadImage(formData: FormData) {
   });
   revalidatePath("/");
   return blob;
+}
+
+export async function editImage({
+  image,
+  fileName,
+}: {
+  image: ListBlobResultBlob;
+  fileName: string;
+}) {
+  if (fileName !== null) {
+    await put(image.pathname, fileName, {
+      access: "public",
+    });
+  }
+  revalidatePath("/");
 }
 
 export async function eraseImage(image: { url: string }) {

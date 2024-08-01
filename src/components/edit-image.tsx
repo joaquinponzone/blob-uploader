@@ -1,6 +1,6 @@
 "use client";
 
-import { eraseImage } from "@/lib/actions";
+import { editImage, eraseImage } from "@/lib/actions";
 import { Button } from "./ui/button";
 import {
   Dialog,
@@ -14,16 +14,22 @@ import {
 } from "./ui/dialog";
 import { useState } from "react";
 import { useToast } from "@/components/ui/use-toast";
-import { Trash2Icon, X } from "lucide-react";
+import { PencilIcon } from "lucide-react";
+import { Input } from "./ui/input";
+import { ListBlobResultBlob } from "@vercel/blob";
 
-export default function EraseImage({ image }: { image: { url: string } }) {
+export default function EditImage({ image }: { image: ListBlobResultBlob }) {
   const [loading, setLoading] = useState(false);
   const { toast } = useToast();
   const [open, setOpen] = useState(false);
+  const [fileName, setFileName] = useState(image.pathname);
 
-  const handleErase = async () => {
+  const handleEdit = async () => {
     setLoading(true);
-    await eraseImage(image);
+    await editImage({
+      image,
+      fileName,
+    });
     toast({
       title: "Image erased",
       description: "The image has been erased successfully. 🗑️",
@@ -32,27 +38,33 @@ export default function EraseImage({ image }: { image: { url: string } }) {
     setOpen(false);
   };
 
+  const handleChangeFileName = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setFileName(event.target.value);
+  };
+
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger disabled={loading}>
-        <Trash2Icon size={16} className="text-neutral-700 hover:text-red-500" />
+        <PencilIcon
+          size={16}
+          className="text-neutral-700 hover:text-blue-500"
+        />
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
           <DialogTitle>Are you absolutely sure?</DialogTitle>
           <DialogDescription>
-            This action cannot be undone. This will permanently delete your
-            account and remove your data from our servers.
+            <Input
+              type="text"
+              name="fileName"
+              placeholder="File name"
+              onChange={handleChangeFileName}
+            />
           </DialogDescription>
         </DialogHeader>
         <DialogFooter className="sm:justify-start">
-          <Button
-            type="button"
-            variant="destructive"
-            disabled={loading}
-            onClick={handleErase}
-          >
-            {loading ? "Erasing..." : "Erase"}
+          <Button type="button" disabled={loading} onClick={handleEdit}>
+            {loading ? "Editing..." : "Edit"}
           </Button>
           <DialogClose asChild>
             <Button type="button" variant="secondary" disabled={loading}>
