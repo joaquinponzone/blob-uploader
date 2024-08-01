@@ -34,7 +34,7 @@ export default function EraseImage({ image }: { image: { url: string } }) {
     <Dialog>
       <DialogTrigger
         disabled={loading}
-        className="absolute top-0 right-0 bg-transparent text-white border-none text-xs p-1 rounded z-10 cursor-pointer hover:bg-neutral-500/50 hover:text-red-200"
+        className="absolute top-0 right-0 bg-transparent text-white border-none text-xs p-1 rounded-full z-10 cursor-pointer hover:bg-neutral-500/50 hover:text-red-200 animate-in animate-out duration-500"
       >
         <X size={24} />
         {/* <Trash2Icon size={20} /> */}

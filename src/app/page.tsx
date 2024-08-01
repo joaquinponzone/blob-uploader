@@ -1,7 +1,9 @@
+import ImageSkeleton from "@/components/image-skeleton";
 import { Images } from "@/components/images";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import Uploader from "@/components/uploader";
+import { Suspense } from "react";
 
 export default function Home() {
   return (
@@ -15,7 +17,19 @@ export default function Home() {
           <Uploader />
         </CardContent>
         <CardContent>
-          <Images />
+          <Suspense
+            fallback={
+              <div className="grid grid-cols-5">
+                <ImageSkeleton />
+                <ImageSkeleton />
+                <ImageSkeleton />
+                <ImageSkeleton />
+                <ImageSkeleton />
+              </div>
+            }
+          >
+            <Images />
+          </Suspense>
         </CardContent>
       </Card>
     </main>

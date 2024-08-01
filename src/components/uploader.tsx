@@ -76,7 +76,7 @@ export default function Uploader() {
         </div>
         <label
           htmlFor="image-upload"
-          className="group relative mt-2 flex h-48 cursor-pointer flex-col items-center justify-center rounded-md border border-gray-300 border-dashed bg-white shadow-sm transition-all hover:bg-gray-50"
+          className="group relative mt-2 flex h-80 cursor-pointer flex-col items-center justify-center rounded-md border border-gray-300 border-dashed bg-white shadow-sm transition-all hover:bg-gray-50"
         >
           <div
             className="absolute z-[5] h-full w-full rounded-md"
@@ -130,7 +130,7 @@ export default function Uploader() {
             <svg
               className={`${
                 dragActive ? "scale-110" : "scale-100"
-              } h-7 w-7 text-gray-500 transition-all duration-75 group-hover:scale-110 group-active:scale-95`}
+              } h-7 w-7 text-gray-500 transition-all duration-300 group-hover:scale-110 group-active:scale-95`}
               xmlns="http://www.w3.org/2000/svg"
               width="24"
               height="24"
