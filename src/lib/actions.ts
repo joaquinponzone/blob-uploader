@@ -13,7 +13,20 @@ export async function uploadImage(formData: FormData) {
 }
 
 export async function eraseImage(image: { url: string }) {
-  "use server";
   await del(image.url);
   revalidatePath("/");
+}
+
+export async function callThirdPartyAPI({
+  status = "start",
+}: {
+  status: string;
+}) {
+  await fetch("https://example.com", {
+    method: "POST",
+    body: JSON.stringify({ status }),
+    headers: {
+      "content-type": "application/json",
+    },
+  });
 }

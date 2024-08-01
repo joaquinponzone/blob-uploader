@@ -1,8 +1,7 @@
 "use client";
 
 import { useState, useCallback, useMemo, ChangeEvent } from "react";
-import { PutBlobResult } from "@vercel/blob";
-import { uploadImage } from "@/lib/actions";
+import { callThirdPartyAPI, uploadImage } from "@/lib/actions";
 import { useToast } from "./ui/use-toast";
 
 export default function Uploader() {
@@ -52,6 +51,7 @@ export default function Uploader() {
       onSubmit={async (e) => {
         e.preventDefault();
         setSaving(true);
+        callThirdPartyAPI({ status: "start" });
         try {
           await uploadImage(new FormData(e.currentTarget));
           setSaving(false);
@@ -61,22 +61,22 @@ export default function Uploader() {
             title: "Image uploaded",
             description: "The image has been uploaded successfully. 🚀",
           });
+          callThirdPartyAPI({ status: "success" });
         } catch (error) {
           console.error(error);
           alert("Failed to upload image");
           setSaving(false);
+          callThirdPartyAPI({ status: "fail" });
         }
       }}
     >
-      <div>
+      <div className="py-6">
         <div className="space-y-1 mb-4">
-          <p className="text-sm text-gray-500">
-            Accepted formats: .png, .jpg, .gif, .mp4
-          </p>
+          <p className="text-sm text-gray-500">Accepted formats: .png, .jpg</p>
         </div>
         <label
           htmlFor="image-upload"
-          className="group relative mt-2 flex h-80 cursor-pointer flex-col items-center justify-center rounded-md border border-gray-300 border-dashed bg-white shadow-sm transition-all hover:bg-gray-50"
+          className="group relative mt-2 flex h-full min-h-40 w-full min-w-40 cursor-pointer flex-col items-center justify-center rounded-md border border-gray-300 border-dashed bg-white shadow-sm transition-all hover:bg-gray-50"
         >
           <div
             className="absolute z-[5] h-full w-full rounded-md"
@@ -103,7 +103,11 @@ export default function Uploader() {
               const file = e.dataTransfer.files && e.dataTransfer.files[0];
               if (file) {
                 if (file.size / 1024 / 1024 > 5) {
-                  alert("File size too big (max 5MB)");
+                  toast({
+                    title: "File size too big",
+                    description: "The file size is too big (max 5MB).",
+                    variant: "destructive",
+                  });
                 } else {
                   setFile(file);
                   const reader = new FileReader();
@@ -158,7 +162,7 @@ export default function Uploader() {
             <img
               src={data.image}
               alt="Preview"
-              className="h-full w-full rounded-md object-cover"
+              className="h-full w-full rounded-md object-cover p-2"
             />
           )}
         </label>
@@ -183,7 +187,7 @@ export default function Uploader() {
         } flex h-10 w-full items-center justify-center rounded-md border text-sm transition-all focus:outline-none`}
       >
         {saving ? (
-          <p>Loading ...</p>
+          <p>Uploading ...</p>
         ) : (
           <p className="text-sm">Confirm upload</p>
         )}

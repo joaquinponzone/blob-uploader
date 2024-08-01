@@ -19,6 +19,7 @@ import { Trash2Icon, X } from "lucide-react";
 export default function EraseImage({ image }: { image: { url: string } }) {
   const [loading, setLoading] = useState(false);
   const { toast } = useToast();
+  const [open, setOpen] = useState(false);
 
   const handleErase = async () => {
     setLoading(true);
@@ -28,10 +29,11 @@ export default function EraseImage({ image }: { image: { url: string } }) {
       description: "The image has been erased successfully. 🗑️",
     });
     setLoading(false);
+    setOpen(false);
   };
 
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger
         disabled={loading}
         className="absolute top-0 right-0 bg-transparent text-white border-none text-xs p-1 rounded-full z-10 cursor-pointer hover:bg-neutral-500/50 hover:text-red-200 animate-in animate-out duration-500"
