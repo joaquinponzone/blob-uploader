@@ -40,7 +40,16 @@ export async function Images() {
                 <TableCell className="font-medium">
                   {(image.size / 1024 / 1024).toFixed(2)} MB
                 </TableCell>
-                <TableCell>{image.pathname}</TableCell>
+                <TableCell>
+                  <Link
+                    href={image.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-blue-500"
+                  >
+                    {image.pathname}
+                  </Link>
+                </TableCell>
                 <TableCell className="flex gap-4 w-full justify-end">
                   <Link
                     href={image.downloadUrl}

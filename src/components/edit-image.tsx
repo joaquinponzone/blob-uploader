@@ -52,7 +52,7 @@ export default function EditImage({ image }: { image: ListBlobResultBlob }) {
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Are you absolutely sure?</DialogTitle>
+          <DialogTitle>Edit</DialogTitle>
           <DialogDescription>
             <Input
               type="text"
