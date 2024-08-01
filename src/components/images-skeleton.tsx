@@ -18,8 +18,7 @@ export default function ImagesSkeleton() {
           <TableRow>
             <TableHead className="w-[100px]">Size</TableHead>
             <TableHead>Name</TableHead>
-
-            <TableHead className="text-center">Actions</TableHead>
+            <TableHead className="w-[100px] text-center">Actions</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -32,11 +31,11 @@ export default function ImagesSkeleton() {
                 <TableCell>
                   <Skeleton className="h-4 w-[150px]" />
                 </TableCell>
-                <TableCell className="flex gap-2 w-full justify-center">
-                  <Skeleton className="h-4 w-[50px]" />
-                  <Skeleton className="h-4 w-[50px]" />
+                <TableCell className="flex gap-2 w-full justify-end">
+                  <Skeleton className="h-4 w-[25px]" />
+                  <Skeleton className="h-4 w-[25px]" />
 
-                  <Skeleton className="h-4 w-[50px]" />
+                  <Skeleton className="h-4 w-[25px]" />
                 </TableCell>
               </TableRow>
             );

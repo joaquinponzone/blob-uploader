@@ -15,6 +15,8 @@ import { DownloadIcon, PencilIcon, Trash2Icon } from "lucide-react";
 import Link from "next/link";
 import EditImage from "./edit-image";
 
+export const dynamic = "force-dynamic";
+
 export async function Images() {
   async function allImages() {
     const blobs = await list();
